@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Tarefas e Horários</title>
+    <link rel="icon" href="https://cdn-icons-png.flaticon.com/512/4856/4856779.png" type="image/png">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+            background-color: #FFD700;
+            color: #000;
+        }
+        h1 {
+            color: #fff;
+            background-color: #000;
+            padding: 10px;
+            border-radius: 8px;
+            text-align: center;
+        }
+
+        /* Abas */
+        .tabs {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+        .tab-button {
+            padding: 10px 20px;
+            margin: 0 5px;
+            border: none;
+            border-radius: 5px 5px 0 0;
+            background-color: #000;
+            color: #FFD700;
+            cursor: pointer;
+            font-weight: bold;
+        }
+        .tab-button.active {
+            background-color: #FFD700;
+            color: #000;
+        }
+        .tab-content {
+            display: none;
+        }
+        .tab-content.active {
+            display: block;
+        }
+
+        /* Compartilhado */
+        form, table {
+            background: #fff;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.2);
+        }
+        form {
+            padding: 20px;
+            max-width: 500px;
+            margin: 40px auto;
+        }
+        label {
+            font-weight: bold;
+        }
+        input, select, textarea, button {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #000;
+            border-radius: 5px;
+        }
+        button {
+            background-color: #000;
+            color: #FFD700;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #333;
+        }
+        textarea {
+            height: 100px;
+            width: 475px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 40px;
+        }
+        th, td {
+            border: 1px solid #000;
+            padding: 10px;
+            text-align: left;
+            vertical-align: top;
+        }
+        th {
+            background-color: #000;
+            color: #FFD700;
+        }
+        
+    </style>
+</head>
+<body>
+    <h1>Organizador Escolar</h1>
+
+    <div class="tabs">
+        <button class="tab-button active" onclick="abrirAba('tarefas')">Tarefas</button>
+        <button class="tab-button" onclick="abrirAba('horarios')">Horários</button>
+    </div>
+
+    <div id="tarefas" class="tab-content active">
+        <form id="formTarefa">
+            <label>Data (dd/mm/aa):</label>
+            <input type="text" id="data" placeholder="Ex: 23/04/25" required>
+
+            <label>Matéria:</label>
+            <select id="materia">
+                <option>Matemática</option>
+                <option>Português</option>
+                <option>Física</option>
+                <option>Química</option>
+                <option>Biologia</option>
+                <option>História</option>
+                <option>Geografia</option>
+                <option>Inglês</option>
+                <option>Filosofia</option>
+                <option>Artes</option>
+                <option>Educação Física</option>
+                <option>Web Design</option>
+                <option>Lógica de Programação</option>
+                <option>Hardware</option>
+                <option>Metodologia Científica</option>
+                <option>Fundamentos da Informática</option>
+            </select>
+
+            <label>Tipo de Avaliação:</label>
+            <select id="tipo">
+                <option>Trabalho</option>
+                <option>Prova</option>
+                <option>Tarefa</option>
+            </select>
+
+            <label>Tarefa:</label>
+            <textarea id="tarefa" rows="6" cols="50"></textarea>
+
+            <button type="submit">Adicionar</button>
+        </form>
+
+        <h2>Tarefas da Semana</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Data</th>
+                    <th>Dia da Semana</th>
+                    <th>Matéria</th>
+                    <th>Tipo</th>
+                    <th>Tarefa</th>
+                    <th>Ação</th>
+                </tr>
+            </thead>
+            <tbody id="corpoTabela"></tbody>
+        </table>
+    </div>
+
+    <div id="horarios" class="tab-content">
+        <table>
+            <tr>
+                <th>Segunda</th>
+                <th>Terça</th>
+                <th>Quarta</th>
+                <th>Quinta</th>
+                <th>Sexta</th>
+            </tr>
+            <tr>
+                <td><strong>Manhã</strong><br>Inglês<br>Inglês<br><strong>Lanche</strong><br>Geografia<br>Geografia<br>Biologia</td>
+                <td><strong>Manhã</strong><br>Hardware<br>Hardware<br><strong>Lanche</strong><br>Filosofia<br>Lógica de Programação<br>Lógica de Programação</td>
+                <td><strong>Manhã</strong><br>Química<br>Química<br><strong>Lanche</strong><br>Matemática<br>Matemática<br>Filosofia</td>
+                <td><strong>Manhã</strong><br>História<br>Artes<br><strong>Lanche</strong><br>Artes<br>Lógica de Programação<br>Lógica de Programação</td>
+                <td><strong>Manhã</strong><br>Língua Portuguesa<br>Língua Portuguesa<br><strong>Lanche</strong><br>Língua Portuguesa<br>Educação Física<br>Educação Física</td>
+            </tr>
+            <tr>
+                <td><strong>Tarde</strong><br>Biologia<br>Matemática<br>Matemática<br><strong>Lanche</strong><br>Web Design<br>Web Design</td>
+                <td><strong>Tarde</strong><br><br><br><br><strong></strong><br><br></td>
+                <td><strong>Tarde</strong><br>História<br>Hardware<br>Hardware<br><strong>Lanche</strong><br>Metodologia Científica<br>Metodologia Científica</td>
+                <td><strong>Tarde</strong><br><br><br><br><strong></strong><br><br></td>
+                <td><strong>Tarde</strong><br>Física<br>Física<br>Fundamentos da Informática<br><strong>Lanche</strong><br>Fundamentos da Informática<br></td>
+            </tr>
+        </table>
+    </div>
+
+    <script>
+        function abrirAba(id) {
+            document.querySelectorAll(".tab-content").forEach(div => div.classList.remove("active"));
+            document.querySelectorAll(".tab-button").forEach(btn => btn.classList.remove("active"));
+            document.getElementById(id).classList.add("active");
+            document.querySelector(`[onclick="abrirAba('${id}')"]`).classList.add("active");
+        }
+
+        const corpoTabela = document.getElementById("corpoTabela");
+        const form = document.getElementById("formTarefa");
+
+        function obterDiaSemana(dataString) {
+            const [dia, mes, ano] = dataString.split("/").map(Number);
+            const data = new Date(`20${ano}-${mes}-${dia}`);
+            const dias = ["Domingo", "Segunda", "Terça", "Quarta", "Quinta", "Sexta", "Sábado"];
+            return dias[data.getDay()];
+        }
+
+        function carregarTarefas() {
+            corpoTabela.innerHTML = "";
+            let tarefas = JSON.parse(localStorage.getItem("tarefas")) || [];
+            const tarefasComIndice = tarefas.map((t, i) => ({ ...t, originalIndex: i }));
+            tarefasComIndice.sort((a, b) => {
+                const [d1, m1, a1] = a.data.split("/").map(Number);
+                const [d2, m2, a2] = b.data.split("/").map(Number);
+                return new Date(2000 + a1, m1 - 1, d1) - new Date(2000 + a2, m2 - 1, d2);
+            });
+            tarefasComIndice.forEach(t => {
+                const tr = document.createElement("tr");
+                const diaSemana = obterDiaSemana(t.data);
+                tr.innerHTML = `
+                    <td>${t.data}</td>
+                    <td>${diaSemana}</td>
+                    <td>${t.materia}</td>
+                    <td>${t.tipo}</td>
+                    <td>${t.tarefa}</td>
+                    <td><button onclick="excluirTarefa(${t.originalIndex})">Excluir</button></td>
+                `;
+                corpoTabela.appendChild(tr);
+            });
+        }
+
+        function excluirTarefa(indice) {
+            let tarefas = JSON.parse(localStorage.getItem("tarefas")) || [];
+            if (confirm("Tem certeza que deseja excluir esta tarefa?")) {
+                tarefas.splice(indice, 1);
+                localStorage.setItem("tarefas", JSON.stringify(tarefas));
+                carregarTarefas();
+            }
+        }
+
+        form.addEventListener("submit", function (e) {
+            e.preventDefault();
+            const data = document.getElementById("data").value;
+            const materia = document.getElementById("materia").value;
+            const tipo = document.getElementById("tipo").value;
+            const tarefa = document.getElementById("tarefa").value;
+
+            let tarefas = JSON.parse(localStorage.getItem("tarefas")) || [];
+            tarefas.push({ data, materia, tipo, tarefa });
+            localStorage.setItem("tarefas", JSON.stringify(tarefas));
+
+            alert("Tarefa adicionada com sucesso!");
+            form.reset();
+            carregarTarefas();
+        });
+
+        carregarTarefas();
+    </script>
+</body>
+</html>
