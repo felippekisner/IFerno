@@ -3,8 +3,39 @@
 <head>
   <meta charset="UTF-8">
   <title>Organizador Escolar</title>
+  <style>
+    body { font-family: Arial, sans-serif; padding: 20px; }
+    table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+    th, td { border: 1px solid #ccc; padding: 8px; text-align: left; }
+    th { background-color: #f4f4f4; }
+  </style>
+</head>
+<body>
+  <h1>Organizador Escolar</h1>
+  <form id="formTarefa">
+    <label>Data (dd/mm/aa): <input type="text" id="data" required></label><br><br>
+    <label>Matéria: <input type="text" id="materia" required></label><br><br>
+    <label>Tipo: <input type="text" id="tipo" required></label><br><br>
+    <label>Tarefa: <input type="text" id="tarefa" required></label><br><br>
+    <button type="submit">Adicionar Tarefa</button>
+  </form>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Data</th>
+        <th>Dia</th>
+        <th>Matéria</th>
+        <th>Tipo</th>
+        <th>Tarefa</th>
+        <th>Ação</th>
+      </tr>
+    </thead>
+    <tbody id="corpoTabela"></tbody>
+  </table>
+
+  <!-- Coloque o script no final do body! -->
   <script type="module">
-    // Importa Firebase
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-app.js";
     import { getFirestore, collection, addDoc, getDocs, deleteDoc, doc } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-firestore.js";
 
@@ -83,9 +114,5 @@
 
     carregarTarefas();
   </script>
-  <!-- Coloque aqui o mesmo <style> e HTML do seu código acima (sem alterações) -->
-</head>
-<body>
-  <!-- TODO: Copie exatamente a mesma parte <body> do seu código original, sem mudanças -->
 </body>
 </html>
