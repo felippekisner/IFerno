@@ -1,79 +1,67 @@
-import { initializeApp } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-app.js";
-import { getFirestore, collection, addDoc, getDocs, deleteDoc, doc } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-firestore.js";
+function abrirAba(id) {
+    document.querySelectorAll(".tab-content").forEach(div => div.classList.remove("active"));
+    document.querySelectorAll(".tab-button").forEach(btn => btn.classList.remove("active"));
+    document.getElementById(id).classList.add("active");
+    document.querySelector(`[onclick="abrirAba('${id}')"]`).classList.add("active");
+}
 
-document.addEventListener("DOMContentLoaded", () => {
-  const firebaseConfig = {
-    apiKey: "AIzaSyCqWaY2RdgWVcJyZUZmAvnL7YJ41Et8Y6s",
-    authDomain: "organizadorlp.firebaseapp.com",
-    projectId: "organizadorlp",
-    storageBucket: "organizadorlp.firebasestorage.app",
-    messagingSenderId: "233130911029",
-    appId: "1:233130911029:web:78e0542cd09f7830b4987c",
-    measurementId: "G-WZP1LGTPQY"
-  };
+const corpoTabela = document.getElementById("corpoTabela");
+const form = document.getElementById("formTarefa");
 
-  const app = initializeApp(firebaseConfig);
-  const db = getFirestore(app);
-  const tarefasRef = collection(db, "tarefas");
-
-  const form = document.getElementById("formTarefa");
-  const corpoTabela = document.getElementById("corpoTabela");
-
-  function obterDiaSemana(dataString) {
+function obterDiaSemana(dataString) {
     const [dia, mes, ano] = dataString.split("/").map(Number);
     const data = new Date(`20${ano}-${mes}-${dia}`);
     const dias = ["Domingo", "Segunda", "Terça", "Quarta", "Quinta", "Sexta", "Sábado"];
     return dias[data.getDay()];
-  }
+}
 
-  async function carregarTarefas() {
+function carregarTarefas() {
     corpoTabela.innerHTML = "";
-    const snapshot = await getDocs(tarefasRef);
-    let tarefas = [];
-    snapshot.forEach(doc => {
-      tarefas.push({ id: doc.id, ...doc.data() });
+    let tarefas = JSON.parse(localStorage.getItem("tarefas")) || [];
+    const tarefasComIndice = tarefas.map((t, i) => ({ ...t, originalIndex: i }));
+    tarefasComIndice.sort((a, b) => {
+        const [d1, m1, a1] = a.data.split("/").map(Number);
+        const [d2, m2, a2] = b.data.split("/").map(Number);
+        return new Date(2000 + a1, m1 - 1, d1) - new Date(2000 + a2, m2 - 1, d2);
     });
-
-    tarefas.sort((a, b) => {
-      const [d1, m1, a1] = a.data.split("/").map(Number);
-      const [d2, m2, a2] = b.data.split("/").map(Number);
-      return new Date(2000 + a1, m1 - 1, d1) - new Date(2000 + a2, m2 - 1, d2);
+    tarefasComIndice.forEach(t => {
+        const tr = document.createElement("tr");
+        const diaSemana = obterDiaSemana(t.data);
+        tr.innerHTML = `
+            <td>${t.data}</td>
+            <td>${diaSemana}</td>
+            <td>${t.materia}</td>
+            <td>${t.tipo}</td>
+            <td>${t.tarefa}</td>
+            <td><button onclick="excluirTarefa(${t.originalIndex})">Excluir</button></td>
+        `;
+        corpoTabela.appendChild(tr);
     });
+}
 
-    tarefas.forEach(t => {
-      const tr = document.createElement("tr");
-      const diaSemana = obterDiaSemana(t.data);
-      tr.innerHTML = `
-        <td>${t.data}</td>
-        <td>${diaSemana}</td>
-        <td>${t.materia}</td>
-        <td>${t.tipo}</td>
-        <td>${t.tarefa}</td>
-        <td><button onclick="excluirTarefa('${t.id}')">Excluir</button></td>
-      `;
-      corpoTabela.appendChild(tr);
-    });
-  }
-
-  window.excluirTarefa = async (id) => {
+function excluirTarefa(indice) {
+    let tarefas = JSON.parse(localStorage.getItem("tarefas")) || [];
     if (confirm("Tem certeza que deseja excluir esta tarefa?")) {
-      await deleteDoc(doc(db, "tarefas", id));
-      carregarTarefas();
+        tarefas.splice(indice, 1);
+        localStorage.setItem("tarefas", JSON.stringify(tarefas));
+        carregarTarefas();
     }
-  };
+}
 
-  form.addEventListener("submit", async function (e) {
+form.addEventListener("submit", function (e) {
     e.preventDefault();
     const data = document.getElementById("data").value;
     const materia = document.getElementById("materia").value;
     const tipo = document.getElementById("tipo").value;
     const tarefa = document.getElementById("tarefa").value;
 
-    await addDoc(tarefasRef, { data, materia, tipo, tarefa });
+    let tarefas = JSON.parse(localStorage.getItem("tarefas")) || [];
+    tarefas.push({ data, materia, tipo, tarefa });
+    localStorage.setItem("tarefas", JSON.stringify(tarefas));
+
     alert("Tarefa adicionada com sucesso!");
     form.reset();
     carregarTarefas();
-  });
-
-  carregarTarefas();
 });
+
+carregarTarefas();
