@@ -2,98 +2,183 @@
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
-    <title>Tarefas e Horários</title>
-    <link rel="icon" href="https://cdn-icons-png.flaticon.com/512/4856/4856779.png" type="image/png">
+    <title>Organizador Escolar</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <h1>Organizador Escolar</h1>
-
-    <div class="tabs">
-        <button class="tab-button active" onclick="abrirAba('tarefas')">Tarefas</button>
-        <button class="tab-button" onclick="abrirAba('horarios')">Horários</button>
+    
+   
+    <div class="sidebar">
+        <h1>Organizador Escolar</h1>
+        <button class="tab-btn" onclick="trocarAba('tarefas')">Tarefas</button>
+        <button class="tab-btn" onclick="trocarAba('horarios')">Horários</button>
+        <button class="tab-btn" onclick="trocarAba('professores')">Professores</button>
+        <button class="tab-btn" onclick="trocarAba('noticias')">Notícias</button>
     </div>
 
-    <div id="tarefas" class="tab-content active">
-        <form id="formTarefa">
-            <label>Data (dd/mm/aa):</label>
-            <input type="text" id="data" placeholder="Ex: 23/04/25" required>
+    <div class="content">
+        <div id="tarefas" class="tab-content active">
+            <h2>Cadastrar Tarefa</h2>
+            <form id="formTarefas">
+                <label>Data:</label>
+                <input type="date" id="dataTarefa" required>
 
-            <label>Matéria:</label>
-            <select id="materia">
-                <option>Matemática</option>
-                <option>Português</option>
-                <option>Física</option>
-                <option>Química</option>
-                <option>Biologia</option>
-                <option>História</option>
-                <option>Geografia</option>
-                <option>Inglês</option>
-                <option>Filosofia</option>
-                <option>Artes</option>
-                <option>Educação Física</option>
-                <option>Web Design</option>
-                <option>Lógica de Programação</option>
-                <option>Hardware</option>
-                <option>Metodologia Científica</option>
-                <option>Fundamentos da Informática</option>
-            </select>
+                <label>Matéria:</label>
+                <select id="materiaTarefa">
+                    <option>Matemática</option>
+                    <option>Português</option>
+                    <option>Física</option>
+                    <option>Química</option>
+                    <option>Biologia</option>
+                    <option>História</option>
+                    <option>Geografia</option>
+                    <option>Inglês</option>
+                    <option>Filosofia</option>
+                    <option>Artes</option>
+                    <option>Educação Física</option>
+                    <option>Web Design</option>
+                    <option>Lógica de Programação</option>
+                    <option>Hardware</option>
+                    <option>Metodologia Científica</option>
+                    <option>Fundamentos da Informática</option>
+                </select>
 
-            <label>Tipo de Avaliação:</label>
-            <select id="tipo">
-                <option>Trabalho</option>
-                <option>Prova</option>
-                <option>Tarefa</option>
-            </select>
+                <label>Tipo:</label>
+                <select id="tipoTarefa">
+                    <option>Trabalho</option>
+                    <option>Prova</option>
+                    <option>Tarefa</option>
+                </select>
 
-            <label>Tarefa:</label>
-            <textarea id="tarefa" rows="6" cols="50"></textarea>
+                <label>Descrição:</label>
+                <textarea id="descricaoTarefa" rows="4" required></textarea>
 
-            <button type="submit">Adicionar</button>
-        </form>
+                <button type="submit">Adicionar</button>
+            </form>
 
-        <h2>Tarefas da Semana</h2>
-        <table>
-            <thead>
+            <h2>Tarefas da Semana</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Data</th>
+                        <th>Dia</th>
+                        <th>Matéria</th>
+                        <th>Tipo</th>
+                        <th>Descrição</th>
+                        <th>Ação</th>
+                    </tr>
+                </thead>
+                <tbody id="listaTarefas"></tbody>
+            </table>
+        </div>
+
+        <div id="horarios" class="tab-content">
+            <h2>Horário de Aulas</h2>
+            <table>
                 <tr>
-                    <th>Data</th>
-                    <th>Dia da Semana</th>
-                    <th>Matéria</th>
-                    <th>Tipo</th>
-                    <th>Tarefa</th>
-                    <th>Ação</th>
+                    <th>Segunda</th>
+                    <th>Terça</th>
+                    <th>Quarta</th>
+                    <th>Quinta</th>
+                    <th>Sexta</th>
                 </tr>
-            </thead>
-            <tbody id="corpoTabela"></tbody>
-        </table>
+                <tr>
+                    <td><strong>Manhã</strong><br>Inglês<br>Inglês<br><strong>Lanche</strong><br>Geografia<br>Geografia<br>Biologia</td>
+                    <td><strong>Manhã</strong><br>Hardware<br>Hardware<br><strong>Lanche</strong><br>Filosofia<br>Lógica de Programação<br>Lógica de Programação</td>
+                    <td><strong>Manhã</strong><br>Química<br>Química<br><strong>Lanche</strong><br>Matemática<br>Matemática<br>Filosofia</td>
+                    <td><strong>Manhã</strong><br>História<br>Artes<br><strong>Lanche</strong><br>Artes<br>Lógica de Programação<br>Lógica de Programação</td>
+                    <td><strong>Manhã</strong><br>Português<br>Português<br><strong>Lanche</strong><br>Português<br>Educação Física<br>Educação Física</td>
+                </tr>
+                <tr>
+                    <td><strong>Tarde</strong><br>Biologia<br>Matemática<br>Matemática<br><strong>Lanche</strong><br>Web Design<br>Web Design</td>
+                    <td><strong>Tarde</strong><br><br><br><br><br><br></td>
+                    <td><strong>Tarde</strong><br>História<br>Hardware<br>Hardware<br><strong>Lanche</strong><br>Metodologia Científica<br>Metodologia Científica</td>
+                    <td><strong>Tarde</strong><br><br><br><br><br><br></td>
+                    <td><strong>Tarde</strong><br>Física<br>Física<br>Fundamentos da Informática<br><strong>Lanche</strong><br>Fundamentos da Informática<br></td>
+                </tr>
+            </table>
+        </div>
+
+        <div id="professores" class="tab-content">
+            <h2>Professores e Contato</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Matéria</th>
+                        <th>Professor</th>
+                        <th>Email</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td>Artes</td><td>Suzana Back</td><td>suzana.back@ifc.edu.br</td></tr>
+                    <tr><td>Biologia</td><td>Karlan Rau</td><td>karlan.rau@ifc.edu.br</td></tr>
+                    <tr><td>Educação Física</td><td>Daniel Minuzzi de Souza</td><td>daniel.souza@ifc.edu.br</td></tr>
+                    <tr><td>Filosofia</td><td>Adaltro Prochnov Nunes</td><td>adaltro.nunes@ifc.edu.br</td></tr>
+                    <tr><td>Física</td><td>Cinta Barbosa Passos</td><td>cinta.passos@ifc.edu.br</td></tr>
+                    <tr><td>Fundamentos da Informática</td><td>Adriano Pizzini</td><td>adriano.pizzini@ifc.edu.br</td></tr>
+                    <tr><td>Geografia</td><td>Cloves Alexandre de Castro</td><td>cloves.castro@ifc.edu.br</td></tr>
+                    <tr><td>Hardware</td><td>Heverton Mendes de Oliveira</td><td>heverton.oliveira@ifc.edu.br</td></tr>
+                    <tr><td>História</td><td>Anderson Negru Galcoswki</td><td>anderson.galcoswki@ifc.edu.br</td></tr>
+                    <tr><td>Inglês</td><td>Rita de Cássia da Silveira Cordeiro</td><td>rita.cordeiro@ifc.edu.br</td></tr>
+                    <tr><td>Português</td><td>Cleonice Marisa de Brito Nazedok</td><td>cleonice.nazedok@ifc.edu.br</td></tr>
+                    <tr><td>Lógica de Programação</td><td>Riad Mattos Nassife</td><td>riad.nassife@ifc.edu.br</td></tr>
+                    <tr><td>Matemática</td><td>Micheli Cristina Starosky Roloff</td><td>micheli.roloff@ifc.edu.br</td></tr>
+                    <tr><td>Metodologia Científica</td><td>Fani Luci Martendal Bernhardt</td><td>fani.bernhardt@ifc.edu.br</td></tr>
+                    <tr><td>Química</td><td>Carlos Eduardo Bencke</td><td>carlos.bencke@ifc.edu.br</td></tr>
+                    <tr><td>Web Design</td><td>Shirlei Magali Vendrami</td><td>shirlei.vendrami@ifc.edu.br</td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div id="noticias" class="tab-content">
+            <h2>Adicionar Notícia</h2>
+            <form id="formNoticias">
+                <label>Data:</label>
+                <input type="date" id="dataNoticia" required>
+
+                <label>Matéria:</label>
+                <select id="materiaNoticia">
+                    <option>Mensagem do Instituto</option>
+                    <option>Matemática</option>
+                    <option>Português</option>
+                    <option>Física</option>
+                    <option>Química</option>
+                    <option>Biologia</option>
+                    <option>História</option>
+                    <option>Geografia</option>
+                    <option>Inglês</option>
+                    <option>Filosofia</option>
+                    <option>Artes</option>
+                    <option>Educação Física</option>
+                    <option>Web Design</option>
+                    <option>Lógica de Programação</option>
+                    <option>Hardware</option>
+                    <option>Metodologia Científica</option>
+                    <option>Fundamentos da Informática</option>
+                </select>
+
+                <label>Notícia:</label>
+                <textarea id="conteudoNoticia" rows="4" required></textarea>
+
+                <button type="submit">Adicionar</button>
+            </form>
+
+            <h2>Notícias</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Data</th>
+                        <th>Matéria</th>
+                        <th>Notícia</th>
+                        <th>Ação</th>
+                    </tr>
+                </thead>
+                <tbody id="listaNoticias"></tbody>
+            </table>
+        </div>
     </div>
 
-    <div id="horarios" class="tab-content">
-        <table>
-            <tr>
-                <th>Segunda</th>
-                <th>Terça</th>
-                <th>Quarta</th>
-                <th>Quinta</th>
-                <th>Sexta</th>
-            </tr>
-            <tr>
-                <td><strong>Manhã</strong><br>Inglês<br>Inglês<br><strong>Lanche</strong><br>Geografia<br>Geografia<br>Biologia</td>
-                <td><strong>Manhã</strong><br>Hardware<br>Hardware<br><strong>Lanche</strong><br>Filosofia<br>Lógica de Programação<br>Lógica de Programação</td>
-                <td><strong>Manhã</strong><br>Química<br>Química<br><strong>Lanche</strong><br>Matemática<br>Matemática<br>Filosofia</td>
-                <td><strong>Manhã</strong><br>História<br>Artes<br><strong>Lanche</strong><br>Artes<br>Lógica de Programação<br>Lógica de Programação</td>
-                <td><strong>Manhã</strong><br>Língua Portuguesa<br>Língua Portuguesa<br><strong>Lanche</strong><br>Língua Portuguesa<br>Educação Física<br>Educação Física</td>
-            </tr>
-            <tr>
-                <td><strong>Tarde</strong><br>Biologia<br>Matemática<br>Matemática<br><strong>Lanche</strong><br>Web Design<br>Web Design</td>
-                <td><strong>Tarde</strong><br><br><br><br><strong></strong><br><br></td>
-                <td><strong>Tarde</strong><br>História<br>Hardware<br>Hardware<br><strong>Lanche</strong><br>Metodologia Científica<br>Metodologia Científica</td>
-                <td><strong>Tarde</strong><br><br><br><br><strong></strong><br><br></td>
-                <td><strong>Tarde</strong><br>Física<br>Física<br>Fundamentos da Informática<br><strong>Lanche</strong><br>Fundamentos da Informática<br></td>
-            </tr>
-        </table>
-    </div>
+    <script type="module" src="main.js"></script>
 
-    <script src="main.js"></script>
 </body>
 </html>

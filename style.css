@@ -1,90 +1,82 @@
 body {
+    margin: 0;
     font-family: Arial, sans-serif;
-    padding: 20px;
-    background-color: #FFD700;
-    color: #000;
-}
-h1 {
-    color: #fff;
-    background-color: #000;
-    padding: 10px;
-    border-radius: 8px;
-    text-align: center;
+    display: flex;
 }
 
-/* Abas */
-.tabs {
-    display: flex;
-    justify-content: center;
-    margin-bottom: 20px;
+.sidebar {
+    width: 200px;
+    background-color: #2c3e50;
+    color: white;
+    padding: 20px;
+    height: 100vh;
+    position: fixed;
 }
-.tab-button {
-    padding: 10px 20px;
-    margin: 0 5px;
+
+.sidebar h1 {
+    font-size: 20px;
+    margin-bottom: 30px;
+}
+
+.tab-btn {
+    display: block;
+    margin-bottom: 15px;
+    padding: 10px;
+    background-color: #34495e;
     border: none;
-    border-radius: 5px 5px 0 0;
-    background-color: #000;
-    color: #FFD700;
+    color: white;
     cursor: pointer;
-    font-weight: bold;
+    width: 100%;
+    text-align: left;
+    border-radius: 5px;
+    text-transform: capitalize;
 }
-.tab-button.active {
-    background-color: #FFD700;
-    color: #000;
+
+.tab-btn:hover {
+    background-color: #1abc9c;
 }
+
+.content {
+    margin-left: 240px;
+    padding: 20px;
+    flex: 1;
+}
+
 .tab-content {
     display: none;
 }
+
 .tab-content.active {
     display: block;
 }
 
-/* Compartilhado */
-form, table {
-    background: #fff;
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0,0,0,0.2);
-}
 form {
-    padding: 20px;
-    max-width: 500px;
-    margin: 40px auto;
+    margin-bottom: 20px;
 }
+
 label {
-    font-weight: bold;
+    display: block;
+    margin: 10px 0 5px;
 }
+
 input, select, textarea, button {
     width: 100%;
-    padding: 10px;
-    margin: 10px 0;
-    border: 1px solid #000;
-    border-radius: 5px;
+    padding: 8px;
+    margin-bottom: 10px;
+    box-sizing: border-box;
 }
-button {
-    background-color: #000;
-    color: #FFD700;
-    font-weight: bold;
-    cursor: pointer;
-}
-button:hover {
-    background-color: #333;
-}
-textarea {
-    height: 100px;
-    width: 475px;
-}
+
 table {
     width: 100%;
     border-collapse: collapse;
-    margin-top: 40px;
+    margin-top: 10px;
 }
+
+table, th, td {
+    border: 1px solid #ccc;
+}
+
 th, td {
-    border: 1px solid #000;
-    padding: 10px;
+    padding: 8px;
     text-align: left;
-    vertical-align: top;
-}
-th {
-    background-color: #000;
-    color: #FFD700;
 }
