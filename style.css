@@ -80,3 +80,8 @@ th, td {
     padding: 8px;
     text-align: left;
 }
+@media (max-width: 600px) {
+    body {
+      padding: 10px;
+    }
+  }
