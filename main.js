@@ -15,20 +15,50 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 
+// referências
+const toggleButton = document.getElementById("menu-toggle");
+const sidebar = document.getElementById("sidebar");
+
+// Hover no botão abre a sidebar e troca o texto
+toggleButton.addEventListener("mouseenter", () => {
+  sidebar.classList.add("open");
+  toggleButton.textContent = "Organizador";
+});
+
+// Quando o mouse sair da sidebar, fecha e volta o texto
+sidebar.addEventListener("mouseleave", () => {
+  sidebar.classList.remove("open");
+  toggleButton.textContent = "☰";
+});
+
+
+
+
+
+// Troca entre abas
 // Troca entre abas
 window.trocarAba = function(abaId) {
     document.querySelectorAll('.tab-content').forEach(div => div.style.display = 'none');
     document.getElementById(abaId).style.display = 'block';
 
+    if (abaId === 'pgInicial') carregarInicial();
     if (abaId === 'tarefas') carregarTarefas();
     if (abaId === 'noticias') carregarNoticias();
     if (abaId === 'horarios') carregarHorarios();
     if (abaId === 'professores') carregarProfessores();
 };
 
+// Ao carregar o site, abre direto na aba inicial
+window.onload = () => {
+    trocarAba("pgIncial");
+};
+
+
 // --- TAREFAS ---
+
 function carregarTarefas() {
     document.getElementById("tarefas").innerHTML = `
+    <h2> Cadastrar Tarefas </h2>
         <form id="formTarefa">
             <label>Data:</label>
             <input type="date" id="dataTarefa" required>
@@ -97,6 +127,7 @@ window.excluirTarefa = async function(id) {
 // --- NOTÍCIAS ---
 function carregarNoticias() {
     document.getElementById("noticias").innerHTML = `
+    <h2> Cadastrar Noticias </h2>
         <form id="formNoticias">
             <label>Data:</label>
             <input type="date" id="dataNoticia" placeholder="Ex: 23/04/25" required>
@@ -178,6 +209,15 @@ function carregarHorarios() {
                 <td><strong>Tarde</strong><br>Física<br>Física<br>Fundamentos da Informática<br><strong>Lanche</strong><br>Fundamentos da Informática</td>
             </tr>
         </table>
+    `;
+}
+function carregarInicial() {
+    document.getElementById("pgInicial").innerHTML = `
+        <h2>Introdução</h2> <br>
+        <p>                                                 Bem-vindo ao seu espaço de apoio à organização escolar! Este site foi criado especialmente para ajudar alunos como você a se manterem organizados, motivados e no controle da rotina de estudos. Aqui, você vai encontrar dicas, ferramentas e materiais que facilitam o planejamento das tarefas, o gerenciamento do tempo e o alcance de melhores resultados na escola. 
+        Tudo pensado para tornar o seu dia a dia mais leve e produtivo.</p>
+        
+        
     `;
 }
 

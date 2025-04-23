@@ -7,20 +7,68 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+        <div class="sidebar" id="sidebar">
+            <div class="top">
+              <button id="menu-toggle">☰</button>
+            </div>
+            <button class="tab-btn"onclick="trocarAba('pgIncial')">
+              <span class="icon">🏠</span>
+              <span class="text">Início</span>
+            </button>
+            <button class="tab-btn" onclick="trocarAba('tarefas')">
+              <span class="icon">📝</span>
+              <span class="text">Tarefas</span>
+            </button>
+            <button class="tab-btn" onclick="trocarAba('horarios')">
+              <span class="icon">⏰</span>
+              <span class="text">Horários</span>
+            </button>
+            <button class="tab-btn" onclick="trocarAba('professores')">
+              <span class="icon">👨‍🏫</span>
+              <span class="text">Professores</span>
+            </button>
+            <button class="tab-btn" onclick="trocarAba('noticias')">
+              <span class="icon">📰</span>
+              <span class="text">Notícias</span>
+            </button>
+            <a href="https://docs.google.com/forms/d/e/1FAIpQLSdEBMilPMnIajdF9MeV7QLqe9UyW6QWDxK2zauj0beSQUhdBA/viewform?usp=sharing" target="_blank"><button class="tab-btn">
+                <span class="icon">🙋</span>
+                <span class="text">Sugestões</span>
+              </button></a>
+          </div>
+        
+
     
-   
-    <div class="sidebar">
-        <h1>Organizador Escolar</h1>
-        <button class="tab-btn" onclick="trocarAba('tarefas')">Tarefas</button>
-        <button class="tab-btn" onclick="trocarAba('horarios')">Horários</button>
-        <button class="tab-btn" onclick="trocarAba('professores')">Professores</button>
-        <button class="tab-btn" onclick="trocarAba('noticias')">Notícias</button>
-        <a href="https://docs.google.com/forms/d/e/1FAIpQLSdEBMilPMnIajdF9MeV7QLqe9UyW6QWDxK2zauj0beSQUhdBA/viewform?usp=sharing" target="_blank"><button class="tab-btn" onclick="trocarAba('sugestao')">Sugestões</button></a>
-
-    </div>
-
     <div class="content">
-        <div id="tarefas" class="tab-content active">
+        <div id="pgIncial" class="tab-content active">
+            <h2>Home</h2><br>
+            <p>Seja muito bem-vindo(a) ao Organizador FTK! <br><br>
+
+                Desenvolvido especialmente para os alunos do Instituto Federal Catarinense – Campus Blumenau (IFC Blumenau), o Organizador FTK é sua nova ferramenta de apoio aos estudos. Aqui você encontrará tudo o que precisa para planejar seu dia a dia acadêmico com praticidade e eficiência:
+                
+                <br><br> Horários: visualize sua grade diária organizada por turnos (manhã e tarde), com detalhes dos intervalos e transições entre aulas. Nunca mais perca um compromisso!
+                <br><br>
+                Tarefas: cadastre, acompanhe e priorize todas as suas atividades por matéria e por dia. O Organizador FTK lembra você dos prazos para que seus trabalhos sejam sempre entregues no prazo.
+                <br><br>
+                Contato de Professores: tenha em mãos os dados de comunicação (e-mail, ramal ou redes institucionais) dos seus docentes. Dúvidas de última hora? Converse diretamente com quem pode te ajudar!
+                <br><br>
+                Notícias: fique por dentro das últimas atualizações do campus e de oportunidades acadêmicas (eventos, concursos, workshops). Informação sempre atualizada para que você não perca nenhuma chance de crescimento.
+                <br>
+                <br>
+                E muito mais: recursos extras, dicas de estudo, links úteis, feeds de bibliotecas digitais e formulários de avaliação para um feedback contínuo.
+                <br><br>
+                Este projeto é idealizado e mantido por Felippe Tesser Kisner, aluno do IFC Blumenau e entusiasta de tecnologia educacional, que entende as necessidades de quem vive a rotina do campus. A gestão e moderação do site ficam sob responsabilidade da líder de turma, Jamile, garantindo que todos os conteúdos e funcionalidades estejam alinhados às demandas da turma e do instituto.
+                <br><br>
+                Explore todas as funcionalidades e experimente uma nova forma de gerenciar seus compromissos acadêmicos. Seja mais produtivo, reduza o estresse e conquiste seus objetivos com o Organizador FTK.
+                <br><br>
+                Boa jornada de estudos e conte sempre conosco!
+                <br><br>
+                —
+                Felippe Tesser Kisner <br>
+                Criador do Organizador FTK</p>
+            
+        </div>
+        <div id="tarefas" class="tab-content">
             <h2>Cadastrar Tarefa</h2>
             <form id="formTarefas">
                 <label>Data:</label>
