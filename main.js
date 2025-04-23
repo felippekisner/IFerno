@@ -1,7 +1,7 @@
+// Firebase Configuração já existente
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
 import { getFirestore, collection, addDoc, getDocs, deleteDoc, doc, query, orderBy } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
 
-// Firebase config
 const firebaseConfig = {
   apiKey: "AIzaSyCqWaY2RdgWVcJyZUZmAvnL7YJ41Et8Y6s",
   authDomain: "organizadorlp.firebaseapp.com",
@@ -15,7 +15,7 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 
-// referências
+// Referências
 const toggleButton = document.getElementById("menu-toggle");
 const sidebar = document.getElementById("sidebar");
 
@@ -31,17 +31,22 @@ sidebar.addEventListener("mouseleave", () => {
   toggleButton.textContent = "☰";
 });
 
+// Fechar sidebar ao selecionar uma aba (em dispositivos móveis)
+document.querySelectorAll("#sidebar a").forEach(link => {
+  link.addEventListener("click", () => {
+    if (window.innerWidth <= 768) {
+      sidebar.classList.remove("open");
+      toggleButton.textContent = "☰";
+    }
+  });
+});
 
-
-
-
-// Troca entre abas
 // Troca entre abas
 window.trocarAba = function(abaId) {
     document.querySelectorAll('.tab-content').forEach(div => div.style.display = 'none');
     document.getElementById(abaId).style.display = 'block';
 
-    if (abaId === 'pgInicial') carregarInicial();
+    if (abaId === 'pgIncial') carregarInicial();
     if (abaId === 'tarefas') carregarTarefas();
     if (abaId === 'noticias') carregarNoticias();
     if (abaId === 'horarios') carregarHorarios();
@@ -51,8 +56,19 @@ window.trocarAba = function(abaId) {
 // Ao carregar o site, abre direto na aba inicial
 window.onload = () => {
     trocarAba("pgIncial");
+    ajustarSidebar();
 };
 
+// Função para ajustar a sidebar em telas pequenas
+function ajustarSidebar() {
+  if (window.innerWidth <= 768) {
+    sidebar.classList.remove("open");
+    toggleButton.textContent = "☰";
+  }
+}
+
+// Recalcular ao redimensionar a janela
+window.addEventListener("resize", ajustarSidebar);
 
 // --- TAREFAS ---
 
