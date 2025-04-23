@@ -93,10 +93,10 @@ th{
 }
 
 .tab-btn:hover::after {
-  content: "•";
-  color: #e74c3c;                      /* vermelho vivo */
-  position: left;
-  left: 15px;
+  content: "|";
+  color: #e74c3c;
+  position: absolute;
+  left: 30px;
 }
 /* Style geral para parágrafos */
 p {
@@ -111,6 +111,7 @@ p {
   border-radius: 0.25rem; /* Cantos levemente arredondados */
   box-shadow: 0 2px 4px rgba(0,0,0,0.05); /* Sombra sutil */
 }
+
 
 /* Ajuste de espaçamento extra entre parágrafos consecutivos */
 p + p {
