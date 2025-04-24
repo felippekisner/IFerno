@@ -1,91 +1,177 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Organizador FTK - Mobile</title>
-  <style>
-    body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      background: #f5f5f5;
-      padding: 1rem;
-    }
-
-    header {
-      background-color: #129b2d;
-      color: white;
-      padding: 1rem;
-      text-align: center;
-      font-size: 1.3rem;
-      font-weight: bold;
-    }
-
-    nav {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      margin-top: 1rem;
-      gap: 0.5rem;
-    }
-
-    nav button {
-      flex: 1 1 45%;
-      padding: 1rem;
-      font-size: 1rem;
-      background-color: #1abc9c;
-      border: none;
-      color: white;
-      border-radius: 8px;
-      cursor: pointer;
-    }
-
-    section {
-      margin-top: 2rem;
-    }
-
-    section h2 {
-      font-size: 1.2rem;
-      color: #129b2d;
-    }
-
-    .card {
-      background: white;
-      border-left: 4px solid #129b2d;
-      padding: 1rem;
-      border-radius: 8px;
-      margin-top: 1rem;
-      box-shadow: 0 2px 4px rgba(0,0,0,0.05);
-    }
-
-    footer {
-      margin-top: 3rem;
-      text-align: center;
-      font-size: 0.9rem;
-      color: #888;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <title>Organizador Escolar - Mobile</title>
+    <link rel="stylesheet" href="style-mobile.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body>
-  <header>Organizador FTK 📱</header>
+    <header>
+        <h1>Organizador FTK</h1>
+        <nav>
+            <button onclick="trocarAba('pgIncial')">Início</button>
+            <button onclick="trocarAba('tarefas')">Tarefas</button>
+            <button onclick="trocarAba('noticias')">Notícias</button>
+            <button onclick="trocarAba('horarios')">Horários</button>
+            <button onclick="trocarAba('professores')">Professores</button>
+            <a href="https://docs.google.com/forms/d/e/1FAIpQLSdEBMilPMnIajdF9MeV7QLqe9UyW6QWDxK2zauj0beSQUhdBA/viewform?usp=sharing" target="_blank">Sugestões</a>
+        </nav>
+    </header>
 
-  <nav>
-    <button onclick="alert('Página de Tarefas')">Tarefas</button>
-    <button onclick="alert('Página de Horários')">Horários</button>
-    <button onclick="alert('Professores')">Professores</button>
-    <button onclick="alert('Notícias')">Notícias</button>
-  </nav>
-
-  <section>
-    <h2>Bem-vindo!</h2>
-    <div class="card">
-      Aqui você encontra suas tarefas, horários, professores e avisos diretamente pelo celular.
-      Essa é uma versão simplificada e rápida para facilitar sua organização.
+    <div class="content">
+        <div id="pgIncial" class="tab-content active">
+            <h2>Bem-vindo ao Organizador FTK!</h2>
+            <p>O Organizador FTK é uma ferramenta prática e eficiente para estudantes do IFC Blumenau. Ele permite organizar tarefas, acompanhar horários de aulas, acessar contatos de professores e manter-se informado com notícias do campus. Com design intuitivo e funcionalidade responsiva, oferece uma experiência otimizada tanto para desktops quanto para dispositivos móveis, incluindo suporte a armazenamento dinâmico via Firebase. Ideal para planejar e gerenciar sua rotina acadêmica.</p>
+        </div>
+        <div id="tarefas" class="tab-content">
+            <h2>Cadastrar Tarefa</h2>
+            <form id="formTarefas">
+                <label>Data:</label>
+                <input type="date" id="dataTarefa" required>
+                <label>Matéria:</label>
+                <select id="materiaTarefa">
+                    <option>Matemática</option>
+                    <option>Português</option>
+                    <option>Física</option>
+                    <option>Química</option>
+                    <option>Biologia</option>
+                    <option>História</option>
+                    <option>Geografia</option>
+                    <option>Inglês</option>
+                    <option>Filosofia</option>
+                    <option>Artes</option>
+                    <option>Educação Física</option>
+                    <option>Web Design</option>
+                    <option>Lógica de Programação</option>
+                    <option>Hardware</option>
+                    <option>Metodologia Científica</option>
+                    <option>Fundamentos da Informática</option>
+                </select>
+                <label>Tipo:</label>
+                <select id="tipoTarefa">
+                    <option>Trabalho</option>
+                    <option>Prova</option>
+                    <option>Tarefa</option>
+                </select>
+                <label>Descrição:</label>
+                <textarea id="descricaoTarefa" rows="4" required></textarea>
+                <button type="submit">Adicionar</button>
+            </form>
+            <h2>Tarefas da Semana</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Data</th>
+                        <th>Matéria</th>
+                        <th>Tipo</th>
+                        <th>Descrição</th>
+                        <th>Ação</th>
+                    </tr>
+                </thead>
+                <tbody id="listaTarefas"></tbody>
+            </table>
+        </div>
+        <div id="noticias" class="tab-content">
+            <h2>Cadastrar Notícia</h2>
+            <form id="formNoticias">
+                <label>Data:</label>
+                <input type="date" id="dataNoticia" required>
+                <label>Matéria:</label>
+                <select id="materiaNoticia">
+                    <option>Mensagem do Instituto</option>
+                    <option>Matemática</option>
+                    <option>Português</option>
+                    <option>Física</option>
+                    <option>Química</option>
+                    <option>Biologia</option>
+                    <option>História</option>
+                    <option>Geografia</option>
+                    <option>Inglês</option>
+                    <option>Filosofia</option>
+                    <option>Artes</option>
+                    <option>Educação Física</option>
+                    <option>Web Design</option>
+                    <option>Lógica de Programação</option>
+                    <option>Hardware</option>
+                    <option>Metodologia Científica</option>
+                    <option>Fundamentos da Informática</option>
+                </select>
+                <label>Notícia:</label>
+                <textarea id="conteudoNoticia" rows="4" required></textarea>
+                <button type="submit">Adicionar</button>
+            </form>
+            <h2>Notícias</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Data</th>
+                        <th>Matéria</th>
+                        <th>Notícia</th>
+                        <th>Ação</th>
+                    </tr>
+                </thead>
+                <tbody id="listaNoticias"></tbody>
+            </table>
+        </div>
+        <div id="horarios" class="tab-content">
+            <h2>Horário de Aulas</h2>
+            <table>
+                <tr>
+                    <th>Segunda</th>
+                    <th>Terça</th>
+                    <th>Quarta</th>
+                    <th>Quinta</th>
+                    <th>Sexta</th>
+                </tr>
+                <tr>
+                    <td><strong>Manhã</strong><br>Inglês<br>Inglês<br><strong>Lanche</strong><br>Geografia<br>Geografia<br>Biologia</td>
+                    <td><strong>Manhã</strong><br>Hardware<br>Hardware<br><strong>Lanche</strong><br>Filosofia<br>Lógica de Programação<br>Lógica de Programação</td>
+                    <td><strong>Manhã</strong><br>Química<br>Química<br><strong>Lanche</strong><br>Matemática<br>Matemática<br>Filosofia</td>
+                    <td><strong>Manhã</strong><br>História<br>Artes<br><strong>Lanche</strong><br>Artes<br>Lógica de Programação<br>Lógica de Programação</td>
+                    <td><strong>Manhã</strong><br>Português<br>Português<br><strong>Lanche</strong><br>Português<br>Educação Física<br>Educação Física</td>
+                </tr>
+                <tr>
+                    <td><strong>Tarde</strong><br>Biologia<br>Matemática<br>Matemática<br><strong>Lanche</strong><br>Web Design<br>Web Design</td>
+                    <td><strong>Tarde</strong><br><br><br><br><br><br></td>
+                    <td><strong>Tarde</strong><br>História<br>Hardware<br>Hardware<br><strong>Lanche</strong><br>Metodologia Científica<br>Metodologia Científica</td>
+                    <td><strong>Tarde</strong><br><br><br><br><br><br></td>
+                    <td><strong>Tarde</strong><br>Física<br>Física<br>Fundamentos da Informática<br><strong>Lanche</strong><br>Fundamentos da Informática<br></td>
+                </tr>
+            </table>
+        </div>
+        <div id="professores" class="tab-content">
+            <h2>Professores e Contato</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Matéria</th>
+                        <th>Professor</th>
+                        <th>Email</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td>Artes</td><td>Suzana Back</td><td>suzana.back@ifc.edu.br</td></tr>
+                    <tr><td>Biologia</td><td>Karlan Rau</td><td>karlan.rau@ifc.edu.br</td></tr>
+                    <tr><td>Educação Física</td><td>Daniel Minuzzi de Souza</td><td>daniel.souza@ifc.edu.br</td></tr>
+                    <tr><td>Filosofia</td><td>Adaltro Prochnov Nunes</td><td>adaltro.nunes@ifc.edu.br</td></tr>
+                    <tr><td>Física</td><td>Cinta Barbosa Passos</td><td>cinta.passos@ifc.edu.br</td></tr>
+                    <tr><td>Fundamentos da Informática</td><td>Adriano Pizzini</td><td>adriano.pizzini@ifc.edu.br</td></tr>
+                    <tr><td>Geografia</td><td>Cloves Alexandre de Castro</td><td>cloves.castro@ifc.edu.br</td></tr>
+                    <tr><td>Hardware</td><td>Heverton Mendes de Oliveira</td><td>heverton.oliveira@ifc.edu.br</td></tr>
+                    <tr><td>História</td><td>Anderson Negru Galcoswki</td><td>anderson.galcoswki@ifc.edu.br</td></tr>
+                    <tr><td>Inglês</td><td>Rita de Cássia da Silveira Cordeiro</td><td>rita.cordeiro@ifc.edu.br</td></tr>
+                    <tr><td>Português</td><td>Cleonice Marisa de Brito Nazedok</td><td>cleonice.nazedok@ifc.edu.br</td></tr>
+                    <tr><td>Lógica de Programação</td><td>Riad Mattos Nassife</td><td>riad.nassife@ifc.edu.br</td></tr>
+                    <tr><td>Matemática</td><td>Micheli Cristina Starosky Roloff</td><td>micheli.roloff@ifc.edu.br</td></tr>
+                    <tr><td>Metodologia Científica</td><td>Fani Luci Martendal Bernhardt</td><td>fani.bernhardt@ifc.edu.br</td></tr>
+                    <tr><td>Química</td><td>Carlos Eduardo Bencke</td><td>carlos.bencke@ifc.edu.br</td></tr>
+                    <tr><td>Web Design</td><td>Shirlei Magali Vendrami</td><td>shirlei.vendrami@ifc.edu.br</td></tr>
+                </tbody>
+            </table>
+        </div>
     </div>
-  </section>
 
-  <footer>
-    Criado por Felippe Tesser Kisner | IFC Blumenau
-  </footer>
+    <script type="module" src="mobile.js"></script>
 </body>
 </html>
