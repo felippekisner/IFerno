@@ -122,11 +122,58 @@ th, td {
     padding: 8px;
     text-align: left;
 }
+/* RESPONSIVIDADE PARA TELAS ATÉ 600px */
+/* Responsividade para dispositivos móveis */
 @media (max-width: 600px) {
-    body {
-      padding: 10px;
-    }
+  body {
+      flex-direction: column; /* Coloca elementos em coluna */
   }
+
+  .sidebar {
+    width: 70%; /* A barra ocupará 70% da largura da tela */
+    transform: translateX(-100%); /* Esconde a barra lateral inicialmente */
+}
+
+.sidebar.open {
+    transform: translateX(0); /* Exibe a barra lateral quando aberta */
+}
+
+/* Ajustar conteúdo principal */
+.content {
+    margin-left: 0; /* Remove a margem lateral para o conteúdo */
+    padding: 10px; /* Adiciona um espaçamento menor para conteúdo */
+}
+
+  .sidebar h1 {
+      font-size: 1.2rem; /* Reduz tamanho do texto no celular */
+  }
+
+  .sidebar .icon {
+      font-size: 1.2rem; /* Ajusta tamanho dos ícones */
+  }
+
+  .content {
+      margin-left: 0; /* Remove margem para dispositivos móveis */
+      padding: 1rem; /* Garante espaçamento interno adequado */
+  }
+
+  h2 {
+      font-size: 1.5rem; 
+      text-align: center;
+  }
+
+  p {
+      font-size: 1rem;
+      line-height: 1.5;
+      padding: 0.5rem;
+  }
+
+  table {
+      font-size: 0.8rem;
+      overflow-x: auto;
+      display: block;
+  }
+}
   body {
     margin: 0;
     font-family: Arial, sans-serif;
