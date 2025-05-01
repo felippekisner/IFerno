@@ -6,6 +6,10 @@
     <link rel="shortcut icon" href="https://static.planejativo.com/wp-content/uploads/2023/05/capas-e-imagens3-1024x576.png">
     <link rel="stylesheet" href="style.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="manifest" href="manifest.json">
+<link rel="icon" type="image/png" href="Organizador FTK.png">
+<meta name="theme-color" content="#129b2d">
+
 </head>
 <body>
     <script>
@@ -38,10 +42,7 @@
               <span class="icon">📰</span>
               <span class="text">Notícias</span>
             </button>
-            <button class="tab-btn"onclick="trocarAba('conteudo')">
-                <span class="icon">🏠</span>
-                <span class="text">Conteúdos</span>
-              </button>
+            
             <a href="https://docs.google.com/forms/d/e/1FAIpQLSdEBMilPMnIajdF9MeV7QLqe9UyW6QWDxK2zauj0beSQUhdBA/viewform?usp=sharing" target="_blank"><button class="tab-btn">
                 <span class="icon">🙋</span>
                 <span class="text">Sugestões</span>
@@ -68,7 +69,7 @@
                 <br>
                 E muito mais: recursos extras, dicas de estudo, links úteis, feeds de bibliotecas digitais e formulários de avaliação para um feedback contínuo.
                 <br><br>
-                Este projeto é idealizado e mantido por Felippe Tesser Kisner, aluno do IFC Blumenau e entusiasta de tecnologia educacional, que entende as necessidades de quem vive a rotina do campus. A gestão e moderação do site ficam sob responsabilidade da líder de turma, Jamille, garantindo que todos os conteúdos e funcionalidades estejam alinhados às demandas da turma e do instituto.
+                Este projeto é idealizado e mantido por Felippe Tesser Kisner, aluno do IFC Blumenau e entusiasta de tecnologia educacional, que entende as necessidades de quem vive a rotina do campus. A gestão e moderação do site ficam sob responsabilidade da líder de turma, Jamile, garantindo que todos os conteúdos e funcionalidades estejam alinhados às demandas da turma e do instituto.
                 <br><br>
                 Explore todas as funcionalidades e experimente uma nova forma de gerenciar seus compromissos acadêmicos. Seja mais produtivo, reduza o estresse e conquiste seus objetivos com o Organizador FTK.
                 <br><br>
@@ -79,26 +80,9 @@
                 Criador do Organizador FTK</p>
             
         </div>
-        <div id="conteudo" class="tab-content">
-            <h2>Conteúdos</h2>
-    <table>
-        <thead>
-            <tr>
-                <th>Matéria</th>
-                <th>Arquivo</th>
-                <th>Ação</th>
-            </tr>
-            
-        </thead>
-        <tbody id="listaConteudos"></tbody>
-    </table>
-
-        </div>
         <div id="tarefas" class="tab-content">
             <h2>Cadastrar Tarefa</h2>
             <form id="formTarefas">
-                <label>Data:</label>
-                <input type="date" id="dataTarefa" required>
 
                 <label>Matéria:</label>
                 <select id="materiaTarefa">
@@ -127,6 +111,12 @@
                     <option>Tarefa</option>
                 </select>
 
+                <label>Data Inicio:</label>
+                <input type="date" id="dataITarefa" required>
+
+                <label>Data Final:</label>
+                <input type="date" id="dataFTarefa" >
+
                 <label>Descrição:</label>
                 <textarea id="descricaoTarefa" rows="4" required></textarea>
 
@@ -137,7 +127,8 @@
             <table>
                 <thead>
                     <tr>
-                        <th>Data</th>
+                        <th>Data Inicio</th>
+                        <th>Data Final</th>
                         <th>Dia</th>
                         <th>Matéria</th>
                         <th>Tipo</th>
@@ -191,10 +182,10 @@
                     <tr><td>Biologia</td><td>Karlan Rau</td><td>karlan.rau@ifc.edu.br</td></tr>
                     <tr><td>Educação Física</td><td>Daniel Minuzzi de Souza</td><td>daniel.souza@ifc.edu.br</td></tr>
                     <tr><td>Filosofia</td><td>Adaltro Prochnov Nunes</td><td>adaltro.nunes@ifc.edu.br</td></tr>
-                    <tr><td>Física</td><td>Cintia Barbosa Passos</td><td>cintia.passos@ifc.edu.br</td></tr>
+                    <tr><td>Física</td><td>Cinta Barbosa Passos</td><td>cinta.passos@ifc.edu.br</td></tr>
                     <tr><td>Fundamentos da Informática</td><td>Adriano Pizzini</td><td>adriano.pizzini@ifc.edu.br</td></tr>
                     <tr><td>Geografia</td><td>Cloves Alexandre de Castro</td><td>cloves.castro@ifc.edu.br</td></tr>
-                    <tr><td>Hardware</td><td>Hewerton Mendes de Oliveira</td><td>hewerton.oliveira@ifc.edu.br</td></tr>
+                    <tr><td>Hardware</td><td>Heverton Mendes de Oliveira</td><td>heverton.oliveira@ifc.edu.br</td></tr>
                     <tr><td>História</td><td>Anderson Negru Galcoswki</td><td>anderson.galcoswki@ifc.edu.br</td></tr>
                     <tr><td>Inglês</td><td>Rita de Cássia da Silveira Cordeiro</td><td>rita.cordeiro@ifc.edu.br</td></tr>
                     <tr><td>Português</td><td>Cleonice Marisa de Brito Nazedok</td><td>cleonice.nazedok@ifc.edu.br</td></tr>
@@ -237,8 +228,7 @@
                 <label>Notícia:</label>
                 <textarea id="conteudoNoticia" rows="4" required></textarea>
 
-                 <label for="arquivo">Arquivo:</label>
-                <input type="file" id="arquivo" name="arquivo" required />
+                 
 
                 <button type="submit">Adicionar</button>
             </form>
@@ -260,6 +250,18 @@
     </div>
 
     <script type="module" src="main.js"></script>
+    <script>
+        if ('serviceWorker' in navigator) {
+          navigator.serviceWorker.register('/service-worker.js')
+            .then(function(registration) {
+              console.log('Service Worker registrado com sucesso:', registration.scope);
+            })
+            .catch(function(error) {
+              console.log('Falha ao registrar Service Worker:', error);
+            });
+        }
+      </script>
+      
 
 </body>
 </html>

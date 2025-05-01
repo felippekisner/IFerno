@@ -80,12 +80,13 @@ window.addEventListener("resize", ajustarSidebar);
 
 // --- TAREFAS ---
 
+
+  
+
 function carregarTarefas() {
     document.getElementById("tarefas").innerHTML = `
     <h2> Cadastrar Tarefas </h2>
         <form id="formTarefa">
-            <label>Data:</label>
-            <input type="date" id="dataTarefa" required>
             <label>Matéria:</label>
             <select id="materiaTarefa">
                 ${gerarOpcoesMateria()}
@@ -96,13 +97,17 @@ function carregarTarefas() {
                 <option>Prova</option>
                 <option>Tarefa</option>
             </select>
-            <label>Tarefa:</label>
+              <label>Data Inicio :</label>
+            <input type="date" id="dataITarefa" required>
+              <label>Data Final:</label>
+            <input type="date" id="dataFTarefa">
+            <label>Descrição:</label>
             <textarea id="descricaoTarefa" rows="4"></textarea>
             <button type="submit">Adicionar</button>
         </form>
         <table>
             <thead>
-                <tr><th>Data</th><th>Matéria</th><th>Tipo</th><th>Tarefa</th><th>Ação</th></tr>
+                <tr><th>Data Inicio</th><th>Data Final</th><th>Matéria</th><th>Tipo</th><th>Tarefa</th><th>Ação</th></tr>
             </thead>
             <tbody id="listaTarefas"></tbody>
         </table>
@@ -110,15 +115,29 @@ function carregarTarefas() {
 
     document.getElementById("formTarefa").addEventListener("submit", async (e) => {
         e.preventDefault();
+    
+        const materia = document.getElementById("materiaTarefa").value;
+        const tipo = document.getElementById("tipoTarefa").value;
+        const data = document.getElementById("dataITarefa").value;
+        let dataF = document.getElementById("dataFTarefa").value;
+        const descricao = document.getElementById("descricaoTarefa").value;
+    
+        if (!dataF) {
+            dataF = data;
+        }
+    
         const nova = {
-            data: document.getElementById("dataTarefa").value,
-            materia: document.getElementById("materiaTarefa").value,
-            tipo: document.getElementById("tipoTarefa").value,
-            descricao: document.getElementById("descricaoTarefa").value
+            materia: materia,
+            tipo: tipo,
+            data: data,
+            dataF: dataF,
+            descricao: descricao
         };
+    
         await addDoc(collection(db, "tarefas"), nova);
         carregarTarefas();
     });
+    
 
     atualizarTabelaTarefas();
 }
@@ -134,6 +153,7 @@ async function atualizarTabelaTarefas() {
         tbody.innerHTML += `
             <tr>
                 <td>${t.data}</td>
+                <td>${t.dataF}</td>
                 <td>${t.materia}</td>
                 <td>${t.tipo}</td>
                 <td>${t.descricao}</td>
@@ -164,8 +184,7 @@ function carregarNoticias() {
             </select>
             <label>Notícia:</label>
             <textarea id="descricaoNoticia" rows="4"></textarea>
-             <label for="arquivo">Arquivo:</label>
-    <input type="file" id="arquivo" name="arquivo" required />
+             
             <button type="submit">Adicionar</button>
         </form>
         <table>
@@ -262,10 +281,10 @@ function carregarProfessores() {
                 <tr><td>Biologia</td><td>Karlan Rau</td><td>karlan.rau@ifc.edu.br</td></tr>
                 <tr><td>Educação Física</td><td>Daniel Minuzzi de Souza</td><td>daniel.souza@ifc.edu.br</td></tr>
                 <tr><td>Filosofia</td><td>Adaltro Prochnov Nunes</td><td>adaltro.nunes@ifc.edu.br</td></tr>
-                <tr><td>Física</td><td>Cintia Barbosa Passos</td><td>cintia.passos@ifc.edu.br</td></tr>
+                <tr><td>Física</td><td>Cinta Barbosa Passos</td><td>cinta.passos@ifc.edu.br</td></tr>
                 <tr><td>Fundamentos da Informática</td><td>Adriano Pizzini</td><td>adriano.pizzini@ifc.edu.br</td></tr>
                 <tr><td>Geografia</td><td>Cloves Alexandre de Castro</td><td>cloves.castro@ifc.edu.br</td></tr>
-                <tr><td>Hardware e Sistemas Operacionais</td><td>Hewerton Mendes de Oliveira</td><td>hewerton.oliveira@ifc.edu.br</td></tr>
+                <tr><td>Hardware e Sistemas Operacionais</td><td>Heverton Mendes de Oliveira</td><td>heverton.oliveira@ifc.edu.br</td></tr>
                 <tr><td>História</td><td>Anderson Negru Galcoswki</td><td>anderson.galcoswki@ifc.edu.br</td></tr>
                 <tr><td>Inglês</td><td>Rita de Cássia da Silveira Cordeiro</td><td>rita.cordeiro@ifc.edu.br</td></tr>
                 <tr><td>Língua Portuguesa</td><td>Cleonice Marisa de Brito Nazedok</td><td>cleonice.nazedok@ifc.edu.br</td></tr>
